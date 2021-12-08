@@ -19,17 +19,17 @@ app.get("/", function (req, res) {
 });
 
 // your middleware
-const requestip = require('request-ip')
+const requestIp = require('request-ip')
 
-const ipmiddleware = (req,res,next)=>{
-  const clientIp = requestip.getClientIp(req)
+app.use(requestIp.mw())
+
+var ipmiddleware = (req,res,next)=>{
+  const clientIp = requestIp.getClientIp(req)
   next()
 } 
 
-app.use(requestip.mw())
-
 // your first API endpoint... 
-app.get("/api/whoami", function (req, res) {
+app.get("/api/whoami",ipmiddleware ,function (req, res) {
   let ipaddress = req.clientIp
   let language = req.acceptsLanguages()
   let software = req.get('User-Agent')
