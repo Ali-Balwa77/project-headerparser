@@ -34,9 +34,9 @@ app.get("/api/whoami",ipmiddleware ,function (req, res) {
   let language = req.acceptsLanguages()
   let software = req.get('User-Agent')
   res.json({
-    Ipadress:ipaddress,
-    Language:language[0],
-    Software:software
+    ipaddress:ipaddress,
+    language:language[0],
+    software:software
   })
 })
 
